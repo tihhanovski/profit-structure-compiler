@@ -1,0 +1,23 @@
+{
+    "type": "table",
+    "table": "RIIGID",
+    "PK": "ID",
+    "fields": [
+        {"name": "ID", "type": "integer", "pk": true, "def": "", "nullable": false}
+        , {"name": "KOOD", "type": "varchar", "size": 20, "sk": true, "def": "''", "nullable": false}
+        , {"name": "NIMI", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+        , {"name": "SELETUS", "type": "varchar", "size": 1000, "def": "''", "nullable": false}
+        , {"name": "EUKOOD", "type": "varchar", "size": 2, "def": "''", "nullable": false}
+    ],
+    "deleteChecks": [
+        {"table": "KAUBAD", "field": "RIIKID"}
+        , {"table": "MYYGITELLIMUSED", "field": "OBJAADRRIIKID"}
+        , {"table": "FIRMAD", "field": "JURAADRESSRIIKID"}
+        , {"table": "FIRMAD", "field": "POSTIAADRESSRIIKID"}
+        , {"table": "SAATELEHED", "field": "RIIKID"}
+        , {"table": "TOOTAJAD", "field": "RIIKID"}
+        , {"table": "KAUBALIIKUMISED", "field": "OBJAADRRIIKID"}
+    ],
+    "dependencies": [
+    ]
+}

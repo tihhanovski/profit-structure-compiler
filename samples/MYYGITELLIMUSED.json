@@ -1,0 +1,108 @@
+{
+    "type": "table",
+    "table": "MYYGITELLIMUSED",
+    "PK": "ID",
+    "fields": [
+        {"name": "ID", "type": "integer", "pk": true, "def": "", "nullable": false}
+        , {"name": "NRPREFIX", "type": "varchar", "size": 10, "sk": true, "def": "''", "nullable": false}
+        , {"name": "NR", "type": "integer", "sk": true, "def": "", "nullable": false}
+        , {"name": "NRSUFFIX", "type": "varchar", "size": 10, "sk": true, "def": "''", "nullable": false}
+        , {"name": "KPV", "type": "date", "sk": true, "def": "", "nullable": false}
+        , {"name": "FIRMAID", "type": "integer", "def": "0", "nullable": false, "fk": "FIRMAD"}
+        , {"name": "ALLAHINDLUS", "type": "double precision", "def": "0", "nullable": false}
+        , {"name": "HINDKM", "type": "integer", "def": "0", "nullable": false}
+        , {"name": "SELETUS", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+        , {"name": "SUMMA", "type": "double precision", "def": "0", "nullable": false}
+        , {"name": "VIIVIS", "type": "double precision", "def": "0", "nullable": false}
+        , {"name": "MAKSEAEG", "type": "integer", "def": "0", "nullable": false}
+        , {"name": "OBJID", "type": "integer", "def": "0", "nullable": false, "fk": "OSAKONNAD"}
+        , {"name": "VALUUTAID", "type": "integer", "def": "0", "nullable": false, "fk": "VALUUTAD"}
+        , {"name": "KURSS", "type": "dbl12", "def": "1", "nullable": false}
+        , {"name": "ARVEID", "type": "integer", "def": "0", "nullable": false, "fk": "KAUBALIIKUMISED"}
+        , {"name": "RPTFORM", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+        , {"name": "TARNETINGIMUSED", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+        , {"name": "TARNEALGUS", "type": "date", "def": "", "nullable": true }
+        , {"name": "TARNELOPP", "type": "date", "def": "", "nullable": true }
+        , {"name": "ETTEMAKSUD", "type": "smallint", "def": "0", "nullable": false}
+        , {"name": "KOOSTAJAID", "type": "integer", "def": "0", "nullable": false, "fk": "PRUSERS"}
+        , {"name": "OBJAADR", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+        , {"name": "KONTAKTISIK", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+        , {"name": "KONTAKTISIKTEL", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+        , {"name": "KONTAKTISIKEMAIL", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+        , {"name": "SUMMARYROWS", "type": "varchar", "size": 1000, "def": "''", "nullable": false}
+        , {"name": "SUMMARYHEADER", "type": "varchar", "size": 1000, "def": "''", "nullable": false}
+        , {"name": "STAATUSID", "type": "integer", "def": "0", "nullable": false, "fk": "MTELSTAATUSED"}
+        , {"name": "OBJAADRLINN", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+        , {"name": "OBJAADRINDEKS", "type": "varchar", "size": 20, "def": "''", "nullable": false}
+        , {"name": "OBJAADRRIIKID", "type": "integer", "def": "0", "nullable": false, "fk": "RIIGID"}
+        , {"name": "VEOPIIRKONDID", "type": "integer", "def": "0", "nullable": false, "fk": "VEOPIIRKONNAD"}
+        , {"name": "KLIENDINR", "type": "varchar", "size": 50, "def": "''", "nullable": false}
+        , {"name": "MAKSETINGIMUSID", "type": "integer", "def": "0", "nullable": false, "fk": "MAKSETINGIMUSED"}
+        , {"name": "DKURSS", "type": "dbl12", "def": "1", "nullable": false}
+        , {"name": "MVLIIKID", "type": "integer", "def": "0", "nullable": false, "fk": "MITTEVASTAVUSELIIGID"}
+        , {"name": "MAKSJAID", "type": "integer", "def": "0", "nullable": false, "fk": "FIRMAD"}
+        , {"name": "D_CREATORID", "type": "integer", "def": "0", "nullable": false, "fk": "PRUSERS"}
+        , {"name": "D_CREATED", "type": "timestamp", "def": "", "nullable": true }
+        , {"name": "D_CHANGERID", "type": "integer", "def": "0", "nullable": false, "fk": "PRUSERS"}
+        , {"name": "D_CHANGED", "type": "timestamp", "def": "", "nullable": true }
+    ],
+    "deleteChecks": [
+        {"table": "OXAORDER", "field": "PTELLIMUSID"}
+        , {"table": "TOOTMISED", "field": "TELLIMUSID"}
+        , {"table": "OXAORDERROW", "field": "PTELLIMUSID"}
+        , {"table": "MYYGIPAKKUMISED", "field": "TELLIMUSID"}
+        , {"table": "FINLAEKUMISED", "field": "EMTELLIMUSID"}
+        , {"table": "KILETOOTMISED", "field": "TELLIMUSID"}
+        , {"table": "NAFTALEHED", "field": "TELLIMUSID"}
+    ],
+    "dependencies": [
+        {
+            "table": "MTREAD",
+            "fk": "MTID",
+            "fields": [
+                {"name": "MTID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "NR", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "KAUPID", "type": "integer", "def": "", "nullable": false, "fk": "KAUBAD"}
+                , {"name": "YHIKID", "type": "integer", "def": "", "nullable": false, "fk": "YHIKUD"}
+                , {"name": "KOGUS", "type": "double precision", "def": "", "nullable": false}
+                , {"name": "HIND", "type": "double precision", "def": "", "nullable": false}
+                , {"name": "SELETUS", "type": "varchar", "size": 255, "def": "", "nullable": false}
+                , {"name": "KAUPKOOD", "type": "varchar", "size": 50, "def": "", "nullable": false}
+                , {"name": "KAUPNIMI", "type": "varchar", "size": 100, "def": "", "nullable": false}
+                , {"name": "KM", "type": "double precision", "def": "", "nullable": false}
+                , {"name": "YHIKKOOD", "type": "varchar", "size": 10, "def": "", "nullable": false}
+                , {"name": "ALLAHINDLUS", "type": "double precision", "def": "", "nullable": false}
+                , {"name": "KMTARIIFID", "type": "integer", "def": "", "nullable": false, "fk": "KMTARIIFID"}
+                , {"name": "TARNEKPV", "type": "date", "def": "", "nullable": true }
+                , {"name": "JUURDEHINDLUS", "type": "double precision", "def": "0", "nullable": false}
+                , {"name": "LT1", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+                , {"name": "LT2", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+                , {"name": "LT3", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+                , {"name": "KOGUS1", "type": "double precision", "def": "0", "nullable": false}
+                , {"name": "KOGUS2", "type": "double precision", "def": "0", "nullable": false}
+                , {"name": "KOGUS3", "type": "double precision", "def": "0", "nullable": false}
+                , {"name": "LT4", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+                , {"name": "LT5", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+                , {"name": "LT6", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+                , {"name": "KOGUS4", "type": "double precision", "def": "0", "nullable": false}
+                , {"name": "KOGUS5", "type": "double precision", "def": "0", "nullable": false}
+                , {"name": "KOGUS6", "type": "double precision", "def": "0", "nullable": false}
+            ]
+        }
+        , {
+            "table": "MTRKOMPONENDID",
+            "fk": "MTID",
+            "fields": [
+                {"name": "MTID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "KAUPID", "type": "integer", "pk": true, "def": "", "nullable": false, "fk": "KAUBAD"}
+                , {"name": "NR", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "KOMPID", "type": "integer", "pk": true, "def": "", "nullable": false, "fk": "KAUBAD"}
+                , {"name": "KOGUS", "type": "double precision", "def": "", "nullable": false}
+                , {"name": "LADUKUSTID", "type": "integer", "def": "", "nullable": false, "fk": "LAOD"}
+                , {"name": "HIND", "type": "double precision", "def": "", "nullable": false}
+                , {"name": "PRINT", "type": "smallint", "def": "0", "nullable": false}
+                , {"name": "NIMI", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+            ]
+        }
+    ]
+}
