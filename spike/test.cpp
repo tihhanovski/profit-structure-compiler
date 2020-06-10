@@ -36,9 +36,8 @@ void simpleConstruct()
     cout << setw(4) << j2 << endl;
 }
 
-int main()
+void prettifyJson()
 {
-
     // read a JSON file
     std::ifstream i("../samples/MYYGITELLIMUSED.json");
     json j;
@@ -47,6 +46,21 @@ int main()
     // write prettified JSON to another file
     //std::ofstream o("pretty.json");
     cout << std::setw(4) << j << std::endl;
+}
+
+int main()
+{
+    std::ifstream i("../samples/RIIGID.json");
+    json j;
+    i >> j;
+
+    string type;
+    j["type"].get_to(type);
+
+    cout << "type: " << j["type"]  << endl;
+    cout << "type: " << type  << endl;
+
+    //cout << std::setw(4) << j << std::endl;
 
     return 0;
 }

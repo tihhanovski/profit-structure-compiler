@@ -1,6 +1,8 @@
 {
     "type": "table",
     "table": "RIIGID",
+    "class": "Riik",
+    "objId": 9000,
     "PK": "ID",
     "fields": [
         {"name": "ID", "type": "integer", "pk": true, "def": "", "nullable": false}
