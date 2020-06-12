@@ -11,7 +11,8 @@ using nlohmann::json;
 class DBOField
 {
 public:
-    string name, nameUpper, dbType, type;
+    string name, nameUpper, dbType, type, fkClass;
+    int size;
 
     DBOField(json element)
     {
@@ -21,6 +22,26 @@ public:
         boost::to_upper(nameUpper);
         boost::to_lower(name);
         type = getPascalTypeName(dbType);
+        try
+        {
+            element["fkClassName"].get_to(fkClass);
+            boost::to_lower(fkClass);
+        }
+        catch(std::exception& e)
+        {
+            //ignore exception and set class to ""
+            fkClass = "";
+        }
+
+        try
+        {
+            element["size"].get_to(size);
+        }
+        catch(std::exception& e)
+        {
+            //ignore exception and set size to
+            size = 0;
+        }
     }
 
     string getSCFieldDefinition()
@@ -36,5 +57,16 @@ public:
     string getType()
     {
         return type;
+    }
+
+    string getFkClass()
+    {
+        return fkClass;
+    }
+
+    string getSizeStr()
+    {
+        //need this to "map-reduce" magic in DBObject
+        return to_string(size);
     }
 };
