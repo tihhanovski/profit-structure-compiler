@@ -10,8 +10,11 @@ class PascalTypesLibrary
 {
 private:
     json j;
+
 protected:
     static PascalTypesLibrary* singleton_;
+    string getTypeProperty(string dbTypeName, string propName, string defaultValue);
+
 public:
     PascalTypesLibrary();
     PascalTypesLibrary(PascalTypesLibrary &other) = delete;
@@ -19,6 +22,7 @@ public:
     static PascalTypesLibrary* GetInstance();
 
     string getPascalTypeName(string dbName);
+    string getPascalDefValue(string dbTypeName);
 };
 
 PascalTypesLibrary* PascalTypesLibrary::singleton_= nullptr;
@@ -30,19 +34,29 @@ PascalTypesLibrary* PascalTypesLibrary::GetInstance()
     return singleton_;
 }
 
-string PascalTypesLibrary::getPascalTypeName(string dbName)
+string PascalTypesLibrary::getTypeProperty(string dbTypeName, string propName, string defaultValue)
 {
-    string ret = dbName;
+    string ret = dbTypeName;
     boost::to_upper(ret);
     try
     {
-        j[ret]["namePas"].get_to(ret);
+        j[ret][propName].get_to(ret);
         return ret;
     }
     catch(std::exception& e)
     {
-        return dbName + "// error founding type for this name";
+        return defaultValue; //error
     }
+}
+
+string PascalTypesLibrary::getPascalTypeName(string dbName)
+{
+    return getTypeProperty(dbName, "namePas", dbName + "// error founding type for this name");
+}
+
+string PascalTypesLibrary::getPascalDefValue(string dbTypeName)
+{
+    return getTypeProperty(dbTypeName, "defValuePas", "{** error!}");
 }
 
 PascalTypesLibrary::PascalTypesLibrary()
@@ -52,6 +66,10 @@ PascalTypesLibrary::PascalTypesLibrary()
     i.close();
 }
 
+string getPascalDefValue(string dbTypeName)
+{
+    return PascalTypesLibrary::GetInstance()->getPascalDefValue(dbTypeName);
+}
 
 string getPascalTypeName(string dbName)
 {

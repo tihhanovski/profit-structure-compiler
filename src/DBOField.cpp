@@ -11,7 +11,7 @@ using nlohmann::json;
 class DBOField
 {
 public:
-    string name, nameUpper, dbType, type, fkClass;
+    string name, nameUpper, dbType, type, fkClass, defValuePas;
     int size;
 
     DBOField(json element)
@@ -22,6 +22,7 @@ public:
         boost::to_upper(nameUpper);
         boost::to_lower(name);
         type = getPascalTypeName(dbType);
+        defValuePas = getPascalDefValue(dbType);
         try
         {
             element["fkClassName"].get_to(fkClass);
@@ -68,5 +69,10 @@ public:
     {
         //need this to "map-reduce" magic in DBObject
         return to_string(size);
+    }
+
+    string getDefValuePas()
+    {
+        return defValuePas;
     }
 };

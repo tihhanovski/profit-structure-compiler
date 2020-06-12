@@ -120,6 +120,7 @@ public:
             fields.push_back(new DBOField(element));
 
         addMethod("constructor Create; override;", "Clear;\ninherited Create;\n");
+        addClearMethod();
         addMethod("function getDBTable: String; override;", "Result := '" + getTable() + "';\n");
         addMethod("function FieldCount: Integer; override;", "Result := " + to_string(fields.size()) + ";\n");
         addMethod("function RegID: Integer; override;", "Result := " + to_string(objId) + ";\n");
@@ -127,24 +128,17 @@ public:
         addFieldEnumeratorMethod_fieldNr("function GetFieldTypeName(i: Integer): String; override;", &DBOField::getType);
         addFieldEnumeratorMethod_fieldNr("function GetFieldObjectTypeName(i: Integer): String; overload; override;", &DBOField::getFkClass);
         addFieldEnumeratorMethod_fieldNr("function GetFieldSize(i: Integer): Integer; overload; override;", &DBOField::getSizeStr, "0", &quotationMethodNoQuotation);
+        addFieldEnumeratorMethod_fieldNr("function GetFieldValue(i: Integer): Variant; overload; override;", &DBOField::getName, "null", &quotationMethodNoQuotation);
+        addSetFieldValueMethod();
 
         //TODO
         /*
-        function GetFieldSize(i: Integer): Integer; overload; override;
-
-        procedure Clear; override;
         function doLoad: Boolean; override;
         function doSave: Boolean; override;
         function GetDeleteSql: String; override;
         function InnerCanDelete: Boolean; override;
         function IsUnique: Boolean; override;
-        function GetFieldValue(i: Integer): Variant; overload; override;
-        procedure SetFieldValue(i: Integer; val: Variant); overload; override;
-        function GetFieldValue(s: String): Variant; overload; override;
-        procedure SetFieldValue(s: String; val: Variant); overload; override;
-        function GetFieldSize(s: String): Integer; overload; override;
-        function IsFieldOnUI(i: Integer): Boolean; override;
-        function GetUIControlTypeName(i: Integer): String; override;
+
         procedure GetRplCascades(sl: TStringList); override;
         function DeleteCascades(bSoft: Boolean = true): Boolean; override;
         function doReplicationPost: Boolean; override;
@@ -152,11 +146,42 @@ public:
         procedure ClearReplicationSchedule; override;
         */
 
+        //TODO rewrite in base class to use methods with int param
+        /*
+        function GetFieldValue(s: String): Variant; overload; override;
+        procedure SetFieldValue(s: String; val: Variant); overload; override;
+        function GetFieldSize(s: String): Integer; overload; override;
+        */
+
+        //TODO later, those methods are not used now
+        /*
+        function IsFieldOnUI(i: Integer): Boolean; override;
+        function GetUIControlTypeName(i: Integer): String; override;
+        */
+
+    }
+
+    void addClearMethod()
+    {
+        stringstream ss;
+        for(DBOField* f : fields)
+            ss << f->getName() << " := " << f->getDefValuePas() << ";" << endl;
+        addMethod("procedure Clear; override;", ss.str());
+    }
+
+    void addSetFieldValueMethod()
+    {
+        stringstream ss;
+        ss << "case i of" << endl;
+        for(size_t i = 0; i < fields.size(); i++)
+            ss << SC_TAB << i << ": " << fields[i]->getName() << " := " << fields[i]->getType() << "(val);" << endl;
+        ss << "end;" << endl;
+        addMethod("procedure SetFieldValue(i: Integer; val: Variant); overload; override;", ss.str());
     }
 
     void addFieldEnumeratorMethod_fieldNr(
         string methodName,
-        string (DBOField::* p)(),
+        string (DBOField::* fn)(),
         string defaultResult = "",
         string (* quotationMethod)(string s) = &quotationMethodSingleQuoted
     ){
@@ -167,7 +192,7 @@ public:
         ss << "case i of" << endl;
         for(size_t i = 0; i < fields.size(); i++)
             ss << SC_TAB << i << ": Result := "
-                << quotationMethod((fields[i]->*p)())
+                << quotationMethod((fields[i]->*fn)())
                 << ";" << endl;
         ss << SC_TAB << "else Result := "
             << quotationMethod(defaultResult)

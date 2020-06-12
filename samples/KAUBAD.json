@@ -1,0 +1,162 @@
+{
+    "type": "table",
+    "table": "KAUBAD",
+    "objId": 12000,
+    "class": "Kaup",
+    "PK": "ID",
+    "fields": [
+        {"name": "ID", "type": "integer", "pk": true, "def": "", "nullable": false}
+        , {"name": "KOOD", "type": "varchar", "size": 50, "sk": true, "def": "", "nullable": false}
+        , {"name": "NIMI", "type": "varchar", "size": 200, "def": "", "nullable": false}
+        , {"name": "YHIKID", "type": "integer", "def": "", "nullable": false, "fk": "YHIKUD", "fkClassName": "Yhik"}
+        , {"name": "KAUBALIIKID", "type": "integer", "def": "", "nullable": false, "fk": "KAUBALIIGID", "fkClassName": "Kaubaliik"}
+        , {"name": "BAASHIND", "type": "double precision", "def": "", "nullable": false}
+        , {"name": "BHKPV", "type": "date", "def": "", "nullable": false}
+        , {"name": "SELETUS", "type": "varchar", "size": 255, "def": "", "nullable": true }
+        , {"name": "STAATUS", "type": "integer", "def": "", "nullable": false}
+        , {"name": "KMTARIIFID", "type": "integer", "def": "", "nullable": false, "fk": "KMTARIIFID", "fkClassName": "KMTariif"}
+        , {"name": "KONTOID", "type": "integer", "def": "", "nullable": false, "fk": "KONTOD", "fkClassName": "Konto"}
+        , {"name": "OSTUKONTOID", "type": "integer", "def": "", "nullable": false, "fk": "KONTOD", "fkClassName": "Konto"}
+        , {"name": "OSTUKMTARIIFID", "type": "integer", "def": "", "nullable": false, "fk": "KMTARIIFID", "fkClassName": "KMTariif"}
+        , {"name": "TYYP", "type": "integer", "def": "", "nullable": false}
+        , {"name": "TOOTJAID", "type": "integer", "def": "0", "nullable": false, "fk": "TOOTJAD", "fkClassName": "Tootja"}
+        , {"name": "PILT", "type": "varchar", "size": 100, "def": "''", "nullable": false}
+        , {"name": "VARV", "type": "varchar", "size": 50, "def": "''", "nullable": false}
+        , {"name": "TARNIJAID", "type": "integer", "def": "0", "nullable": false, "fk": "FIRMAD", "fkClassName": "Firma"}
+        , {"name": "TARNIJAKOOD", "type": "varchar", "size": 50, "def": "''", "nullable": false}
+        , {"name": "OSTUHIND", "type": "double precision", "def": "0", "nullable": false}
+        , {"name": "OSTUVALUUTAID", "type": "integer", "def": "0", "nullable": false, "fk": "VALUUTAD", "fkClassName": "Valuuta"}
+        , {"name": "JUURDEHINDLUS", "type": "double precision", "def": "0", "nullable": false}
+        , {"name": "RIBAKOOD", "type": "varchar", "size": 50, "def": "''", "nullable": false}
+        , {"name": "KNKAUBAKOODID", "type": "integer", "def": "0", "nullable": false, "fk": "KNKAUBAKOODID", "fkClassName": "KnKaubakood"}
+        , {"name": "RIIKID", "type": "integer", "def": "0", "nullable": false, "fk": "RIIGID", "fkClassName": "Riik"}
+        , {"name": "NIMI2", "type": "varchar", "size": 200, "def": "''", "nullable": false}
+        , {"name": "KMGRUPPID", "type": "integer", "def": "0", "nullable": false, "fk": "KMGRUPID", "fkClassName": "KMGrupp"}
+        , {"name": "EPOOD", "type": "smallint", "def": "0", "nullable": false}
+        , {"name": "KULUKONTOID", "type": "integer", "def": "0", "nullable": false, "fk": "KONTOD", "fkClassName": "Konto"}
+        , {"name": "MPRINT", "type": "smallint", "def": "1", "nullable": false}
+        , {"name": "MYYGIMAKS", "type": "smallint", "def": "0", "nullable": false}
+        , {"name": "GTIN", "type": "varchar", "size": 50, "def": "''", "nullable": false}
+        , {"name": "TAARAID", "type": "integer", "def": "0", "nullable": false, "fk": "KAUBAD", "fkClassName": "Kaup"}
+        , {"name": "LISANIMI", "type": "varchar", "size": 200, "def": "''", "nullable": false}
+        , {"name": "MASTERKAUPID", "type": "integer", "def": "0", "nullable": false, "fk": "KAUBAD", "fkClassName": "Kaup"}
+        , {"name": "VARIATSIOON", "type": "vc200", "def": "''", "nullable": false}
+        , {"name": "OTSAMM", "type": "double precision", "def": "0", "nullable": false}
+        , {"name": "ALTKOOD", "type": "vc50", "def": "''", "nullable": false}
+    ],
+    "deleteChecks": [
+        {"table": "KILEKULUD", "field": "KAUPID"}
+        , {"table": "SYNTKASK", "field": "KAUPID"}
+        , {"table": "OSTUTELLREAD", "field": "KAUPID"}
+        , {"table": "VEINIVALJAKAUBAD", "field": "KAUPID"}
+        , {"table": "KLREAD", "field": "KAUPID"}
+        , {"table": "MPREAD", "field": "KAUPID"}
+        , {"table": "ANALOOGKAUBAD", "field": "K1ID"}
+        , {"table": "ANALOOGKAUBAD", "field": "K2ID"}
+        , {"table": "MTREAD", "field": "KAUPID"}
+        , {"table": "VIRREVOTMISED", "field": "KAUPID"}
+        , {"table": "INVREAD", "field": "KAUPID"}
+        , {"table": "RIREAD", "field": "KAUPID"}
+        , {"table": "KAUBAKOMPONENDID", "field": "KOMPID"}
+        , {"table": "LAORAAMAT", "field": "KAUPID"}
+        , {"table": "OSTUARVEREAD", "field": "KAUPID"}
+        , {"table": "KYFIRMAMOOTJAD", "field": "KAUPID"}
+        , {"table": "ROREAD", "field": "KAUPID"}
+        , {"table": "VEINIPARTIID", "field": "KAUPID"}
+        , {"table": "MPRKOMPONENDID", "field": "KAUPID"}
+        , {"table": "MPRKOMPONENDID", "field": "KOMPID"}
+        , {"table": "MTRKOMPONENDID", "field": "KAUPID"}
+        , {"table": "MTRKOMPONENDID", "field": "KOMPID"}
+        , {"table": "VLHISTORY", "field": "KAUPID"}
+        , {"table": "VLHISTORY", "field": "STPARTIIID"}
+        , {"table": "KYARVEREAD", "field": "KAUPID"}
+        , {"table": "KTREAD", "field": "KAUPID"}
+        , {"table": "KTREAD", "field": "TEGKAUPID"}
+        , {"table": "KAUBAD", "field": "TAARAID"}
+        , {"table": "KAUBAD", "field": "MASTERKAUPID"}
+        , {"table": "PROJEELARVESTLREAD", "field": "KAUPID"}
+        , {"table": "TOOTMISREAD", "field": "KAUPID"}
+        , {"table": "VRKOMPONENDID", "field": "KAUPID"}
+        , {"table": "TMRKOMPONENDID", "field": "KAUPID"}
+        , {"table": "TMRKOMPONENDID", "field": "KOMPID"}
+        , {"table": "SEPKAUBAD", "field": "KAUPID"}
+        , {"table": "VVKAUBAD", "field": "KAUPID"}
+        , {"table": "VMATVOTUKAUBAD", "field": "KAUPID"}
+        , {"table": "VEINIKOMPONENDILISAMISED", "field": "KAUPID"}
+        , {"table": "KILETOOTMISED", "field": "TELLIMUSKAUPID"}
+        , {"table": "KILETOOTMISED", "field": "VALMISTOODANGID"}
+        , {"table": "KILETOOTMISED", "field": "POOLTOODANGID"}
+        , {"table": "KILETOOTMISED", "field": "PAKENDID"}
+        , {"table": "KILETOOTMISED", "field": "TEGPAKENDID"}
+        , {"table": "KILETOOTMISED", "field": "JAATMEDID"}
+        , {"table": "KILETOOTMISED", "field": "ALUSID"}
+        , {"table": "KILETOOTMISED", "field": "MANUALPOOLTOODANGID"}
+        , {"table": "PROJEELARVEREAD", "field": "KAUPID"}
+        , {"table": "NAFTALEHEREAD", "field": "KAUPID"}
+        , {"table": "SLREAD", "field": "KAUPID"}
+    ],
+    "dependencies": [
+        {
+            "table": "KAUBAYHIKUD",
+            "fk": "KAUPID",
+            "fields": [
+                {"name": "KAUPID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "YHIKID", "type": "integer", "pk": true, "def": "", "nullable": false, "fk": "YHIKUD"}
+                , {"name": "KOEF", "type": "double precision", "def": "", "nullable": false}
+            ]
+        }
+        , {
+            "table": "KAUBAMINLAOSEIS",
+            "fk": "KAUPID",
+            "fields": [
+                {"name": "KAUPID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "LADUID", "type": "integer", "pk": true, "def": "", "nullable": false, "fk": "LAOD"}
+                , {"name": "LAOSEIS", "type": "double precision", "def": "0", "nullable": false}
+            ]
+        }
+        , {
+            "table": "KAUBAOSTUHINNAD",
+            "fk": "KAUPID",
+            "fields": [
+                {"name": "KAUPID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "FIRMAID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "NR", "type": "integer", "def": "0", "nullable": false}
+                , {"name": "TARNIJAKOOD", "type": "varchar", "size": 50, "def": "''", "nullable": false}
+                , {"name": "OSTUHIND", "type": "double precision", "def": "0", "nullable": false}
+                , {"name": "VALUUTAID", "type": "integer", "def": "0", "nullable": false, "fk": "VALUUTAD"}
+                , {"name": "JUURDEHINDLUS", "type": "double precision", "def": "0", "nullable": false}
+            ]
+        }
+        , {
+            "table": "KAUBAHINNAD",
+            "fk": "HINNAKIRIID",
+            "fields": [
+                {"name": "KAUPID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "HINNAKIRIID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "HIND", "type": "double precision", "def": "", "nullable": false}
+                , {"name": "ALLAHINDLUS", "type": "double precision", "def": "0", "nullable": false}
+            ]
+        }
+        , {
+            "table": "KAUBAKOMPONENDID",
+            "fk": "KAUPID",
+            "fields": [
+                {"name": "KAUPID", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "NR", "type": "integer", "pk": true, "def": "", "nullable": false}
+                , {"name": "KOMPID", "type": "integer", "def": "", "nullable": false, "fk": "KAUBAD"}
+                , {"name": "KOGUS", "type": "double precision", "def": "", "nullable": false}
+                , {"name": "LADUKUSTID", "type": "integer", "def": "", "nullable": false, "fk": "LAOD"}
+                , {"name": "PRINT", "type": "smallint", "def": "1", "nullable": false}
+            ]
+        }
+        , {
+            "table": "ANALOOGKAUBAD",
+            "fk": "K1ID",
+            "fields": [
+                {"name": "K1ID", "type": "integer", "pk": true, "def": "0", "nullable": false, "fk": "KAUBAD"}
+                , {"name": "K2ID", "type": "integer", "pk": true, "def": "0", "nullable": false, "fk": "KAUBAD"}
+                , {"name": "MEMO", "type": "varchar", "size": 255, "def": "''", "nullable": false}
+            ]
+        }
+    ]
+}
