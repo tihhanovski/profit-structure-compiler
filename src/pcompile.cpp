@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
         ifstream i(s);
         json j;
         i >> j;
+        i.close();
 
         DBOTable* dbo = new DBOTable(j);
         //cout << dbo->getName() << endl << dbo->getType() << endl;
