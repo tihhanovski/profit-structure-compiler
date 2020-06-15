@@ -15,3 +15,5 @@ Tegemata:
 * Täiesti tegemata andmebaasistruktuuri genereerimiseks vajalik fail
 * Lähtekood võiks olla palju paremini dokumenteeritud
 * Projekti struktuur annab soovida
+ * Ei ole lõpuni teinud selgeks kuidas make töötab (sellepärast tuleb kompileerida src kataloogi, mis on vale)
+ * include - sama asi
