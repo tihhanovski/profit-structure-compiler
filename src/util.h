@@ -6,3 +6,6 @@ const string SC_TAB = "    ";
 
 string quotationMethodNoQuotation(string s);
 string quotationMethodSingleQuoted(string s);
+
+void toUpper(string& s);
+void toLower(string& s);

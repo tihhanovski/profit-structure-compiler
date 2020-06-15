@@ -2,8 +2,8 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include "util.h"
 #include "../lib/json/single_include/nlohmann/json.hpp"
-#include <boost/algorithm/string.hpp>
 #include "PascalTypesLibrary.h"
 
 using namespace std;
@@ -24,7 +24,7 @@ PascalTypesLibrary* PascalTypesLibrary::GetInstance()
 string PascalTypesLibrary::getTypeProperty(string dbTypeName, string propName, string defaultValue)
 {
     string ret = dbTypeName;
-    boost::to_upper(ret);
+    toUpper(ret);
     try
     {
         j[ret][propName].get_to(ret);

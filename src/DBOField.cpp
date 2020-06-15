@@ -1,10 +1,10 @@
 #include <string>
 #include <limits>
 #include <vector>
-#include <boost/algorithm/string.hpp>
 #include "../lib/json/single_include/nlohmann/json.hpp"
 #include "PascalTypesLibrary.h"
 #include "DBOField.h"
+#include "util.h"
 
 using namespace std;
 using nlohmann::json;
@@ -14,14 +14,14 @@ DBOField::DBOField(json element)
     element["name"].get_to(name);
     element["type"].get_to(dbType);
     nameUpper = name;
-    boost::to_upper(nameUpper);
-    boost::to_lower(name);
+    toUpper(nameUpper);
+    toLower(name);
     type = getPascalTypeName(dbType);
     defValuePas = getPascalDefValue(dbType);
     try
     {
         element["fkClassName"].get_to(fkClass);
-        boost::to_lower(fkClass);
+        toLower(fkClass);
     }
     catch(std::exception& e)
     {
