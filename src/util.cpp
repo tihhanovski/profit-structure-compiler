@@ -1,5 +1,6 @@
 #include <string>
 #include<bits/stdc++.h>
+#include <fstream>
 
 using namespace std;
 
@@ -21,4 +22,10 @@ void toUpper(string& s)
 void toLower(string& s)
 {
     transform(s.begin(), s.end(), s.begin(), ::tolower);
+}
+
+bool fileExists(const string& name)
+{
+    ifstream f(name.c_str());
+    return f.good();
 }

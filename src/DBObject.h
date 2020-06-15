@@ -6,6 +6,9 @@
 using namespace std;
 using nlohmann::json;
 
+/**
+ * General db object
+ */
 class DBObject
 {
 protected:

@@ -1,53 +1,38 @@
 #include <iostream>
-#include <iomanip>
 #include <string>
-#include <limits>
-#include <fstream>
-#include <cstring>
-#include "../lib/json/single_include/nlohmann/json.hpp"
-#include "DBObject.h"
-#include "DBOTable.h"
+#include "DBOGenerator.h"
 
+//More documentation here:
+//https://docs.google.com/document/d/163JL1iI60Awt6gYROcpLE2ICf0LXvQxG6jr2o-wDQIs/edit#
+
+//Github project:
+//https://github.com/tihhanovski/profit-structure-compiler
 
 using namespace std;
-using nlohmann::json;
 
 int main(int argc, char *argv[])
 {
-    if(argc > 1)
+    //declare generator
+    DBOGenerator g = DBOGenerator();
+
+    //read and set given options
+    for(int i = 1; i < argc; i++)
     {
-        string s = string(argv[1]);
+        string s = string(argv[i]);
+        if(s == "-i")
+            g.inputDir = string(argv[i + 1]);
+        if(s == "-o")
+            g.outputDir = string(argv[i + 1]);
 
-        ifstream i(s);
-        json j;
-        i >> j;
-        i.close();
-
-        DBOTable* dbo = new DBOTable(j);
-        //cout << dbo->getName() << endl << dbo->getType() << endl;
-        cout << "====================================" << endl;
-        dbo->generateSourceCode(cout);
-        cout << "====================================" << endl;
-
-        delete dbo;
-
-        cout << endl;
-
+        if(s == "-h")
+        {
+            cout << "Usage:\n\t" << argv[0] << " -i <input file> -o <output file>" << endl;
+            return 0;
+        }
     }
-    else
-        cout << argv[0] << " <file>" << endl;
 
-    /*
-    std::ifstream i("../samples/RIIGID.json");
-
-    string type;
-    j["type"].get_to(type);
-
-    cout << "type: " << j["type"]  << endl;
-    cout << "type: " << type  << endl;
-
-    //cout << std::setw(4) << j << std::endl;
-    */
+    //generate
+    g.generate();
 
     return 0;
 }

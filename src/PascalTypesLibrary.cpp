@@ -9,7 +9,6 @@
 using namespace std;
 using nlohmann::json;
 
-const string TYPES_FILE = "../samples/types.json";
 
 PascalTypesLibrary* PascalTypesLibrary::singleton_= nullptr;
 
@@ -46,11 +45,15 @@ string PascalTypesLibrary::getPascalDefValue(string dbTypeName)
     return getTypeProperty(dbTypeName, "defValuePas", "{** error!}");
 }
 
-PascalTypesLibrary::PascalTypesLibrary()
+void PascalTypesLibrary::init(string typesFile)
 {
-    ifstream i(TYPES_FILE);
+    ifstream i(typesFile);
     i >> j;
     i.close();
+}
+
+PascalTypesLibrary::PascalTypesLibrary()
+{
 }
 
 string getPascalDefValue(string dbTypeName)

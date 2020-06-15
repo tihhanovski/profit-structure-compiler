@@ -1,1 +1,17 @@
 Tegemist on TTÜ Tartu Kolledži õppeaine Programmeerimine jaoks tehtud projektiga.
+
+Kompileerimiseks:
+    cd src
+    make
+
+    seejärel tekib codegen käivitatav fail, mida saab kasutada näiteks nii:
+
+    ./codegen -i ../samples/sampleproject/
+
+    Tulemusena jooksvasse kataloogi tekivad .pas failid, mis on genereeritud ../samples/sampleproject sisendi järgi
+
+Tegemata:
+* Lõpuni tegemata .pas lähtekoodi loomine, vt DBOTable.cpp
+* Täiesti tegemata andmebaasistruktuuri genereerimiseks vajalik fail
+* Lähtekood võiks olla palju paremini dokumenteeritud
+* Projekti struktuur annab soovida

@@ -22,6 +22,7 @@ public:
 
     string getPascalTypeName(string dbName);
     string getPascalDefValue(string dbTypeName);
+    void init(string typesFile);
 };
 
 string getPascalDefValue(string dbTypeName);

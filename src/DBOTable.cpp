@@ -33,8 +33,9 @@ void DBOTable::outputMethodBodies(ostream& o)
     {
         string sig = m->signature;
         int p = sig.find(" ");
-        int p2 = sig.find(";");
-        o << sig.substr(0, p) << " T" << getClassName() << "." << sig.substr(p+1, p2 - p) << endl;
+        int p2 = sig.find(")");
+        int p3 = sig.find(";", p2 + 1);
+        o << sig.substr(0, p) << " T" << getClassName() << "." << sig.substr(p + 1, p3 - p) << endl;
 
         stringstream ss;
         ss << m->body;
@@ -62,7 +63,7 @@ void DBOTable::generateSCHead(ostream &o)
         << "interface" << endl
         << "uses Classes, MiscFuncs, ProfitObject, DB, IBSQL, SysUtils, Variants;" << endl << endl
         << "type" << endl
-        << SC_TAB << "T" << getClassName() << " = class(TProfitObject2)" << endl;
+        << SC_TAB << "T" << getClassName() << " = class(TProfitObject)" << endl;
 }
 
 void DBOTable::addMethod(string signature, string body, DBOVisibility visibility)
@@ -97,6 +98,7 @@ DBOTable::DBOTable(json j) : DBObject{j}
     addFieldEnumeratorMethod_fieldNr("function GetFieldSize(i: Integer): Integer; overload; override;", &DBOField::getSizeStr, "0", &quotationMethodNoQuotation);
     addFieldEnumeratorMethod_fieldNr("function GetFieldValue(i: Integer): Variant; overload; override;", &DBOField::getName, "null", &quotationMethodNoQuotation);
     addSetFieldValueMethod();
+    addDoLoadMethod();
 
     //TODO
     /*
@@ -126,6 +128,23 @@ DBOTable::DBOTable(json j) : DBObject{j}
     function GetUIControlTypeName(i: Integer): String; override;
     */
 
+}
+
+void DBOTable::addDoLoadMethod()
+{
+    stringstream ss;
+    ss << "Result := false;" << endl
+        << "try" << endl;
+
+    //TODO not implemented yet
+
+
+    ss << "except" << endl
+        << SC_TAB << "on e: Exception do" << endl
+        << SC_TAB << SC_TAB << "LogError(e);" << endl
+        << "end;";
+
+    addMethod("function doLoad: Boolean; override;", ss.str());
 }
 
 void DBOTable::addClearMethod()

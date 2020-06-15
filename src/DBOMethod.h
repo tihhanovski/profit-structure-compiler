@@ -3,12 +3,18 @@
 
 using namespace std;
 
+/**
+ *
+ */
 enum DBOVisibility {mvPrivate, mvProtected, mvPublic};
-//enum DBOMethodType {mtConstructor, mvProcedure, mvFunction};
 
+/**
+ * Method description (function or procedure)
+ */
 class DBOMethod
 {
 public:
     DBOVisibility visibility = mvPublic;
-    string signature, body;
+    string signature;   //method signature for interface part
+    string body;        //method body without first begin and final end
 };

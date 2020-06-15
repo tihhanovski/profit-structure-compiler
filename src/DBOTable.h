@@ -11,19 +11,27 @@
 #include "DBOMethod.h"
 #include "DBObject.h"
 
+/**
+ * Table class
+ */
 class DBOTable : public DBObject
 {
 protected:
-    string table, pk, className;
-    int objId;
-    vector<DBOMethod*> methods;
-    vector<DBOField*> fields;
+    string table, pk, className;    //DB table name, Primary key and class name
+    int objId;  //obj id - used to identify document type in Profit
+    vector<DBOMethod*> methods; //methods array
+    vector<DBOField*> fields;   //fields array
 
+    /**
+     * 
+     */
     void outputFieldVariables(ostream &o);
     void outputMethodInterface(ostream& o, DBOVisibility v);
     void outputMethodBodies(ostream& o);
     void generateSCHead(ostream &o);
     void addMethod(string signature, string body, DBOVisibility visibility = mvPublic);
+    void addDoLoadMethod();
+
 
 public:
     DBOTable(json j);
