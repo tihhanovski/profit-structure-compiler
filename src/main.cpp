@@ -6,7 +6,8 @@
 #include <time.h>
 #include <cstring>
 #include "../lib/json/single_include/nlohmann/json.hpp"
-#include "dbobject.cpp"
+#include "DBObject.h"
+#include "DBOTable.h"
 
 
 using namespace std;

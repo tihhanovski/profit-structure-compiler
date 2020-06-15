@@ -3,76 +3,70 @@
 #include <vector>
 #include <boost/algorithm/string.hpp>
 #include "../lib/json/single_include/nlohmann/json.hpp"
-#include "dbtypes.cpp"
+#include "PascalTypesLibrary.h"
+#include "DBOField.h"
 
 using namespace std;
 using nlohmann::json;
 
-class DBOField
+DBOField::DBOField(json element)
 {
-public:
-    string name, nameUpper, dbType, type, fkClass, defValuePas;
-    int size;
-
-    DBOField(json element)
+    element["name"].get_to(name);
+    element["type"].get_to(dbType);
+    nameUpper = name;
+    boost::to_upper(nameUpper);
+    boost::to_lower(name);
+    type = getPascalTypeName(dbType);
+    defValuePas = getPascalDefValue(dbType);
+    try
     {
-        element["name"].get_to(name);
-        element["type"].get_to(dbType);
-        nameUpper = name;
-        boost::to_upper(nameUpper);
-        boost::to_lower(name);
-        type = getPascalTypeName(dbType);
-        defValuePas = getPascalDefValue(dbType);
-        try
-        {
-            element["fkClassName"].get_to(fkClass);
-            boost::to_lower(fkClass);
-        }
-        catch(std::exception& e)
-        {
-            //ignore exception and set class to ""
-            fkClass = "";
-        }
-
-        try
-        {
-            element["size"].get_to(size);
-        }
-        catch(std::exception& e)
-        {
-            //ignore exception and set size to
-            size = 0;
-        }
+        element["fkClassName"].get_to(fkClass);
+        boost::to_lower(fkClass);
+    }
+    catch(std::exception& e)
+    {
+        //ignore exception and set class to ""
+        fkClass = "";
     }
 
-    string getSCFieldDefinition()
+    try
     {
-        return name + ": " + type + ";";
+        element["size"].get_to(size);
     }
+    catch(std::exception& e)
+    {
+        //ignore exception and set size to
+        size = 0;
+    }
+}
 
-    string getName()
-    {
-        return name;
-    }
+string DBOField::getSCFieldDefinition()
+{
+    return name + ": " + type + ";";
+}
 
-    string getType()
-    {
-        return type;
-    }
+string DBOField::getName()
+{
+    return name;
+}
 
-    string getFkClass()
-    {
-        return fkClass;
-    }
+string DBOField::getType()
+{
+    return type;
+}
 
-    string getSizeStr()
-    {
-        //need this to "map-reduce" magic in DBObject
-        return to_string(size);
-    }
+string DBOField::getFkClass()
+{
+    return fkClass;
+}
 
-    string getDefValuePas()
-    {
-        return defValuePas;
-    }
-};
+string DBOField::getSizeStr()
+{
+    //need this to "map-reduce" magic in DBObject
+    return to_string(size);
+}
+
+string DBOField::getDefValuePas()
+{
+    return defValuePas;
+}

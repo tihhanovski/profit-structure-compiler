@@ -1,29 +1,15 @@
 #include <string>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
 #include "../lib/json/single_include/nlohmann/json.hpp"
+#include <boost/algorithm/string.hpp>
+#include "PascalTypesLibrary.h"
 
 using namespace std;
 using nlohmann::json;
 
 const string TYPES_FILE = "../samples/types.json";
-
-class PascalTypesLibrary
-{
-private:
-    json j;
-
-protected:
-    static PascalTypesLibrary* singleton_;
-    string getTypeProperty(string dbTypeName, string propName, string defaultValue);
-
-public:
-    PascalTypesLibrary();
-    PascalTypesLibrary(PascalTypesLibrary &other) = delete;
-    void operator=(const PascalTypesLibrary &) = delete;
-    static PascalTypesLibrary* GetInstance();
-
-    string getPascalTypeName(string dbName);
-    string getPascalDefValue(string dbTypeName);
-};
 
 PascalTypesLibrary* PascalTypesLibrary::singleton_= nullptr;
 
@@ -33,6 +19,7 @@ PascalTypesLibrary* PascalTypesLibrary::GetInstance()
         singleton_ = new PascalTypesLibrary();
     return singleton_;
 }
+
 
 string PascalTypesLibrary::getTypeProperty(string dbTypeName, string propName, string defaultValue)
 {
